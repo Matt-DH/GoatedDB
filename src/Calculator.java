@@ -1,8 +1,14 @@
+/**
+ * Class which contains functions for calculating and returning values based on given values
+ */
+
 public class Calculator {
 
-    /*
-    Calculation for Auto premium.
-    Premium = base (750) * age factor * location factor * accident factor
+    /**
+     * Calculation for Auto premium.
+     * Premium = base (750) * age factor * location factor * accident factor
+     * @param quoteAuto
+     * @return
      */
 
     public double calculateAutoPremium(QuoteAuto quoteAuto) {
@@ -34,9 +40,11 @@ public class Calculator {
         return premium;
     }
 
-    /*
-    Calculation for Home premium.
-    Premium = base (500) * age factor * dwelling factor * heating factor
+    /**
+     * Calculation for Home premium.
+     * Premium = base (500) * age factor * dwelling factor * heating factor
+     * @param quoteHome
+     * @return
      */
 
     public double calculateHomePremium(QuoteHome quoteHome) {

@@ -1,24 +1,16 @@
 import java.sql.*;
 import java.util.Scanner;
 
+/**
+ * Class for allowing the user to use the program through the CLI
+ */
+
 public class Interface {
 
     public static void main(String[] args) {
-        QuoteLibrary quoteLibrary = DBManager.loadQuoteLibrary();
-
-        for (QuoteAuto quoteAuto : quoteLibrary.getAutoList()) {
-            // print out the index of the quoteAuto
-            System.out.println("quoteauto loop");
-            System.out.println(quoteLibrary.getAutoList().indexOf(quoteAuto));
-        }
-        for (QuoteHome quoteHome : quoteLibrary.getHomeList()) {
-            // print out the index of the quoteHome
-            System.out.println("quotehome loop");
-            System.out.println(quoteLibrary.getHomeList().indexOf(quoteHome));
 
         }
-
-    }
+}
 
 //    public static void main(String[] args) {
 //
@@ -94,6 +86,3 @@ public class Interface {
 //            var14.printStackTrace();
 //        }
 //    }
-
-
-}

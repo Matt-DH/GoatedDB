@@ -1,4 +1,7 @@
-//Quote parent class
+/**
+ * 'BLUEPRINT'
+ * Quote parent class
+ */
 
 public abstract class Quote {
 

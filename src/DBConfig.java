@@ -1,3 +1,7 @@
+/**
+ * Interface containing all information related to the db
+ */
+
 public interface DBConfig {
 
     // MariaDB Driver
@@ -18,8 +22,7 @@ public interface DBConfig {
     String DB_GOAT_BRIDGEQUOTESAUTO = "bridge_quotesauto";
     String DB_GOAT_BRIDGEQUOTESHOME = "bridge_quoteshome";
 
-    // data table id field (applies to 3 data tables)
-
+    // Data table id field (applies to 3 data tables)
     String DB_GOAT_ID = "id";
 
     // quotes_auto table fields

@@ -1,33 +1,46 @@
+/**
+ * 'BLUEPRINT'
+ * Class for customer records from db
+ */
+
 public class Customer {
-    private String username;
-    private String email;
-    private String password;
 
-    public Customer(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+    // VARIABLES
+    private int id;
+    private String nameLast;
+    private String nameFirst;
 
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
+    // CONSTRUCTORS
+    public Customer(int id, String nameLast, String nameFirst) {
+        this.id = id;
+        this.nameLast = nameLast;
+        this.nameFirst = nameFirst;
     }
 
-    public String getEmail() {
-        return username;
-    }
-    public void setEmail(String email) {
-        this.email = email;
+    // SETTERS
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPassword() {
-        return password;
+    public void setNameLast(String nameLast) {
+        this.nameLast = nameLast;
     }
-    public void setPassword() {
-        this.password = password;
+
+    public void setNameFirst() {
+        this.nameFirst = nameFirst;
+    }
+
+    // GETTERS
+    public int getId() {
+        return this.id;
+    }
+
+    public String getNameLast() {
+        return this.nameLast;
+    }
+
+    public String getNameFirst() {
+        return this.nameFirst;
     }
 
 }

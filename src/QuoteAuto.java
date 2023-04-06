@@ -1,3 +1,8 @@
+/**
+ * 'BLUEPRINT'
+ * Child class for AutoQuote records from DB
+ */
+
 public class QuoteAuto extends Quote {
 
     // VARIABLES

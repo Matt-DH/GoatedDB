@@ -1,8 +1,7 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.Format;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * This class communicates with the interface, calculator, and 'blueprint' classes,
@@ -10,6 +9,12 @@ import java.util.LinkedList;
  */
 
 public class DBManager {
+
+    public static RecordLibrary prepareRecords() {
+        RecordLibrary recordLibrary = loadRecords();
+        loadRelationships(recordLibrary);
+        return recordLibrary;
+    }
 
     // Function to instantiate and return a quotelibrary object containing quoteauto and quotehome objects for every record in the db
     public static RecordLibrary loadRecords() {
@@ -19,6 +24,73 @@ public class DBManager {
                 loadCustomerList()
         );
         return recordLibrary;
+    }
+
+    public static void loadRelationships(RecordLibrary recordLibrary) {
+        buildQuotesAutoRelationships(recordLibrary.getCustomerList(), recordLibrary.getAutoList());
+        buildQuotesHomeRelationships(recordLibrary.getCustomerList(), recordLibrary.getHomeList());
+    }
+
+    private static void buildQuotesAutoRelationships(List<Customer> customerList, List<QuoteAuto> autoList) {
+        try {
+            String sql = String.format("SELECT * FROM %s", DBConfig.DB_GOAT_BRIDGEQUOTESAUTO_TABLENAME);
+            ResultSet resultSet = executeQuery(sql);
+            while (resultSet.next()) {
+                int customerId = resultSet.getInt(DBConfig.DB_GOAT_BRIDGE_CUSTOMERID);
+                int quoteId = resultSet.getInt(DBConfig.DB_GOAT_BRIDGE_QUOTEID);
+                Customer customer = null;
+                QuoteAuto quoteAuto = null;
+
+                for (Customer c : customerList) {
+                    if (c.getId() == customerId) {
+                        customer = c;
+                    }
+                }
+
+                for (QuoteAuto q : autoList) {
+                    if (q.getId() == quoteId) {
+                        quoteAuto = q;
+                    }
+                }
+
+                customer.addQuoteAuto(quoteAuto);
+                quoteAuto.setCustomer(customer);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void buildQuotesHomeRelationships(List<Customer> customerList, List<QuoteHome> homeList) {
+        try {
+            String sql = String.format("SELECT * FROM %s", DBConfig.DB_GOAT_BRIDGEQUOTESHOME_TABLENAME);
+            ResultSet resultSet = executeQuery(sql);
+            while (resultSet.next()) {
+                int customerId = resultSet.getInt(DBConfig.DB_GOAT_BRIDGE_CUSTOMERID);
+                int quoteId = resultSet.getInt(DBConfig.DB_GOAT_BRIDGE_QUOTEID);
+                Customer customer = null;
+                QuoteHome quoteHome = null;
+
+                for (Customer c : customerList) {
+                    if (c.getId() == customerId) {
+                        customer = c;
+                    }
+                }
+
+                for (QuoteHome q : homeList) {
+                    if (q.getId() == quoteId) {
+                        quoteHome = q;
+                    }
+                }
+
+                customer.addQuoteHome(quoteHome);
+                quoteHome.setCustomer(customer);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -125,6 +197,30 @@ public class DBManager {
                     ");";
             executeUpdate(sql);
         }   catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addQuoteAutoBridge(int customerid, int quoteid) {
+        try {
+            String sql = "INSERT INTO " + DBConfig.DB_GOAT_BRIDGEQUOTESAUTO_TABLENAME + " VALUES (" +
+                    customerid + ", " +
+                    "\"" + quoteid + "\"" +
+                    ");";
+            executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addQuoteHomeBridge(int customerid, int quoteid) {
+        try {
+            String sql = "INSERT INTO " + DBConfig.DB_GOAT_BRIDGEQUOTESHOME_TABLENAME + " VALUES (" +
+                    customerid + ", " +
+                    "\"" + quoteid + "\"" +
+                    ");";
+            executeUpdate(sql);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

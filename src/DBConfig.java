@@ -19,8 +19,8 @@ public interface DBConfig {
     String DB_GOAT_CUSTOMERS_TABLENAME = "customers";
 
     // Bridge table names
-    String DB_GOAT_BRIDGEQUOTESAUTO = "bridge_quotesauto";
-    String DB_GOAT_BRIDGEQUOTESHOME = "bridge_quoteshome";
+    String DB_GOAT_BRIDGEQUOTESAUTO_TABLENAME = "bridge_quotesauto";
+    String DB_GOAT_BRIDGEQUOTESHOME_TABLENAME = "bridge_quoteshome";
 
     // Data table id field (applies to 3 data tables)
     String DB_GOAT_ID = "id";

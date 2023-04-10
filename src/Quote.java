@@ -6,9 +6,11 @@
 public abstract class Quote {
 
     // VARIABLES
-    public int id = 0;
-    public double base = 0.00;
-    public double total = 0.00;
+    private int id = 0;
+    private double base = 0.00;
+    private double total = 0.00;
+    private Customer customer;
+
 
     // CONSTRUCTORS
     public Quote() {
@@ -30,6 +32,10 @@ public abstract class Quote {
         this.total = total;
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     // GETTERS
     public double getBase() {
         return base;
@@ -37,6 +43,10 @@ public abstract class Quote {
 
     public double getTotal() {
         return total;
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 
 }

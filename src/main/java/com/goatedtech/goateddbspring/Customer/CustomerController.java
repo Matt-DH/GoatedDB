@@ -13,10 +13,8 @@ public class CustomerController {
 
     @GetMapping("/customer_view")
     public String customerList(Model model) {
-        List<Customer> listCustomers = DBManager.recordLibrary.getCustomerList();
-        model.addAttribute("listCustomers", listCustomers);
-        String tstMsg = DBManager.recordLibrary.tstMsg();
-        model.addAttribute("tst_msg", tstMsg);
+        List<Customer> customerList = DBManager.recordLibrary.getCustomerList();
+        model.addAttribute("listCustomers", customerList);
         return "customer_view";
     }
 
@@ -29,7 +27,10 @@ public class CustomerController {
     @PostMapping("/customer_form/add")
     public String customerAdd(Customer customer) {
         DBManager.recordLibrary.addCustomer(customer);
-        DBManager.addCustomer(customer.getId(), customer.getNameLast(), customer.getNameFirst());
+        DBManager.addCustomer(
+                customer.getId(),
+                customer.getNameLast(),
+                customer.getNameFirst());
         return "redirect:/";
     }
 

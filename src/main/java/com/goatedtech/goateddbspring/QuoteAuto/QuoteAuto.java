@@ -86,4 +86,12 @@ public class QuoteAuto extends Quote {
         return accidents;
     }
 
+    // METHODS
+    public String getCustomerDetails() {
+        return String.format("%d | $s $s",
+                this.getCustomer().getId(),
+                this.getCustomer().getNameFirst(),
+                this.getCustomer().getNameLast());
+    }
+
 }

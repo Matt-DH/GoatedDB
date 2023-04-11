@@ -58,10 +58,6 @@ public class RecordLibrary {
         return this.customerList;
     }
 
-    public String tstMsg() {
-        return "RECORD LIBRARY TEST MESSAGE";
-    }
-
     // METHODS
     public void addCustomer(Customer customer) {
         customerList.add(customer);

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Auto Quotes</title>
+</head>
+<body>
+<h1>Auto Quotes</h1>
+<div>
+  <table>
+    <thead>
+    <tr>
+      <th>Auto Quote ID</th>
+      <th>Car Value</th>
+      <th>Driver Age</th>
+      <th>Vehicle Age</th>
+      <th>Accidents</th>
+      <th>Location</th>
+<!--  cant get customer details to load for some reason    -->
+<!--      <th>Customer ID</th>-->
+<!--      <th>Customer Last Name</th>-->
+<!--      <th>Customer First Name</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="quoteAuto : ${listQuoteAuto}">
+      <tr>
+        <td th:text="${quoteAuto.getId()}"></td>
+        <td th:text="${quoteAuto.getCarValue()}"></td>
+        <td th:text="${quoteAuto.getDriverAge()}"></td>
+        <td th:text="${quoteAuto.getVehicleAge()}"></td>
+        <td th:text="${quoteAuto.getAccidents()}"></td>
+        <td th:text="${quoteAuto.getLocation()}"></td>
+<!--        <td th:text="${quoteAuto.getCustomer().getId()}"></td>-->
+<!--        <td th:text="${quoteAuto.getCustomer().getNameLast()}"></td>-->
+<!--        <td th:text="${quoteAuto.getCustomer().getNameFirst()}"></td>-->
+      </tr>
+    </th:block>
+  </table>
+</div>
+</body>
+</html>

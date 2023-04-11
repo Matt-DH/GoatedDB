@@ -62,4 +62,17 @@ public class RecordLibrary {
         return "RECORD LIBRARY TEST MESSAGE";
     }
 
+    // METHODS
+    public void addCustomer(Customer customer) {
+        customerList.add(customer);
+    }
+
+    public void addQuoteAuto(QuoteAuto quoteAuto) {
+        autoList.add(quoteAuto);
+    }
+
+    public void addQuoteHome(QuoteHome quoteHome) {
+        homeList.add(quoteHome);
+    }
+
 }

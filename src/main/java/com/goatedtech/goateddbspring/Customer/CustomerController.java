@@ -1,8 +1,6 @@
 package com.goatedtech.goateddbspring.Customer;
 
 import com.goatedtech.goateddbspring.DBManager;
-import com.goatedtech.goateddbspring.RecordLibrary.RecordLibrary;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +11,26 @@ import java.util.List;
 @Controller
 public class CustomerController {
 
-    @GetMapping("/customers")
-    public String showCustomersList(Model model) {
-//        List<Customer> listCustomers = DBManager.recordLibrary.getCustomerList();
-//        model.addAttribute("listCustomers", listCustomers);
+    @GetMapping("/customer_view")
+    public String customerList(Model model) {
+        List<Customer> listCustomers = DBManager.recordLibrary.getCustomerList();
+        model.addAttribute("listCustomers", listCustomers);
         String tstMsg = DBManager.recordLibrary.tstMsg();
         model.addAttribute("tst_msg", tstMsg);
-        return "customers";
+        return "customer_view";
+    }
+
+    @GetMapping("/customer_form")
+    public String customerForm(Model model) {
+        model.addAttribute("customer", new Customer());
+        return "customer_form";
+    }
+
+    @PostMapping("/customer_form/add")
+    public String customerAdd(Customer customer) {
+        DBManager.recordLibrary.addCustomer(customer);
+        DBManager.addCustomer(customer.getId(), customer.getNameLast(), customer.getNameFirst());
+        return "redirect:/";
     }
 
 //    @GetMapping("/authors/new")

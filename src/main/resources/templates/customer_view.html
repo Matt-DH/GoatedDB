@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>customers</title>
+</head>
+<body>
+<h1>custowmers :3</h1>
+<h1 th:text="${tst_msg}"></h1>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="customer : ${listCustomers}">
+            <tr>
+                <td th:text="${customer.getId()}"></td>
+                <td th:text="${customer.getNameFirst()}"></td>
+                <td th:text="${customer.getNameLast()}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>

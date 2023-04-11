@@ -20,6 +20,11 @@ public class Customer {
     private LinkedList<QuoteHome> homeList = new LinkedList<>();
 
     // CONSTRUCTORS
+    public Customer() {
+        this.id = -1;
+        this.nameFirst = "-";
+        this.nameLast = "-";
+    }
     public Customer(int id, String nameLast, String nameFirst) {
         this.id = id;
         this.nameLast = nameLast;

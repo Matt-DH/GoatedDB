@@ -1,5 +1,6 @@
 package com.goatedtech.goateddbspring.Customer;
 
+import com.goatedtech.goateddbspring.DBManager;
 import com.goatedtech.goateddbspring.RecordLibrary.RecordLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,11 @@ import java.util.List;
 @Controller
 public class CustomerController {
 
-    private RecordLibrary recordLibrary = new RecordLibrary();
-
     @GetMapping("/customers")
     public String showCustomersList(Model model) {
-//        List<Customer> listCustomers = recordLibrary.getCustomerList();
+//        List<Customer> listCustomers = DBManager.recordLibrary.getCustomerList();
 //        model.addAttribute("listCustomers", listCustomers);
-        String tstMsg = recordLibrary.tstMsg();
+        String tstMsg = DBManager.recordLibrary.tstMsg();
         model.addAttribute("tst_msg", tstMsg);
         return "customers";
     }

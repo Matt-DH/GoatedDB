@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Quotes</title>
+</head>
+<body>
+<h1>Home Quotes</h1>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Home Quote ID</th>
+            <th>Home Age</th>
+            <th>Heating Type</th>
+            <th>Dwelling Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="quoteHome : ${listQuoteHome}">
+            <tr>
+                <td th:text="${quoteHome.getId()}"></td>
+                <td th:text="${quoteHome.getHomeAge()}"></td>
+                <td th:text="${quoteHome.getHeatingType()}"></td>
+                <td th:text="${quoteHome.getDwellingType()}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>

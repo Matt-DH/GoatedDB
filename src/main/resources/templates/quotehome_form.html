@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new auto quote record</title>
+</head>
+<body>
+<div>
+    <form th:action="@{/quotehome_form/add}" th:object="${quotehome}" method="post">
+        <table>
+            <tr>
+                <td>Quote ID</td>
+                <td><input type="text" name="id"></td>
+            </tr>
+            <tr>
+                <td>Home Age</td>
+                <td><input type="text" name="homeAge"></td>
+            </tr>
+            <tr>
+                <td>Heating Type</td>
+                <td><input type="text" name="heatingType"></td>
+            </tr>
+            <tr>
+                <td>Dwelling Type</td>
+                <td><input type="text" name="dwellingType"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Save"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

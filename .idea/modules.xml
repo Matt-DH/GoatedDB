@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JavaDBTest.iml" filepath="$PROJECT_DIR$/JavaDBTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GoatedDBSpring.iml" filepath="$PROJECT_DIR$/GoatedDBSpring.iml" />
     </modules>
   </component>
 </project>

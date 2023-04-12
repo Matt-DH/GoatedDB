@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new customer record</title>
+</head>
+<body>
+<div>
+  <form th:action="@{/customer_form/add}" th:object="${customer}" method="post">
+    <table>
+      <tr>
+        <td>Customer ID</td>
+        <td><input type="text" name="id"></td>
+      </tr>
+      <tr>
+        <td>First Name</td>
+        <td><input type="text" name="nameFirst"></td>
+      </tr>
+      <tr>
+        <td>LastName</td>
+        <td><input type="text" name="nameLast"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Save"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>

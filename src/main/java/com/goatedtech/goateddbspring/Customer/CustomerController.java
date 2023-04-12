@@ -3,8 +3,10 @@ package com.goatedtech.goateddbspring.Customer;
 import com.goatedtech.goateddbspring.DBManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -24,13 +26,35 @@ public class CustomerController {
         return "customer_form";
     }
 
-    @PostMapping("/customer_form/add")
+    @GetMapping("/customer_update")
+    public String customerUpdate(Model model) {
+        model.addAttribute("customer", new Customer());
+        return "customer_update";
+    }
+
+    @PostMapping("/customer_form/post")
     public String customerAdd(Customer customer) {
         DBManager.recordLibrary.addCustomer(customer);
         DBManager.addCustomer(
                 customer.getId(),
                 customer.getNameLast(),
                 customer.getNameFirst());
+        return "redirect:/";
+    }
+
+    @PutMapping("/customer_update/put")
+    public String customerUpdate(Customer customer) {
+        DBManager.updateCustomer(
+                customer.getId(),
+                customer.getNameLast(),
+                customer.getNameFirst()
+        );
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/customer_deleteall")
+    public String customerDeleteAll() {
+        DBManager.deleteAllCustomers();
         return "redirect:/";
     }
 

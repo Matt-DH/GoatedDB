@@ -167,6 +167,16 @@ public class DBManager {
         return customerList;
     }
 
+    public static void deleteAllCustomers() {
+        try {
+            String sql = "DELETE FROM " + DBConfig.DB_GOAT_CUSTOMERS_TABLENAME + ";";
+            System.out.println(sql);
+            executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void addQuoteAuto(int id, double value, int driverAge, int vehicleAge, int accidents, int location) {
         try {
             String sql = "INSERT INTO " + DBConfig.DB_GOAT_QUOTESAUTO_TABLENAME + " VALUES (" +
@@ -206,6 +216,23 @@ public class DBManager {
                     ");";
             executeUpdate(sql);
         }   catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateCustomer(int id, String nameLast, String nameFirst) {
+        try {
+            String sql = String.format("UPDATE %s SET %s = \"%s\", %s = \"%s\" WHERE %s = \"%s\";",
+                    DBConfig.DB_GOAT_CUSTOMERS_TABLENAME,
+                    DBConfig.DB_GOAT_CUSTOMERS_NAMELAST,
+                    nameLast,
+                    DBConfig.DB_GOAT_CUSTOMERS_NAMEFIRST,
+                    nameFirst,
+                    DBConfig.DB_GOAT_ID,
+                    id);
+            System.out.println(sql);
+            executeUpdate(sql);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

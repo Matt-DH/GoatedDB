@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Add a new customer record</title>
+  <meta charset="UTF-8">
+  <title>Add a new customer record</title>
 </head>
 <body>
 <div>
-  <form th:action="@{/customer_form/post}" th:object="${customer}" method="post">
+  <form th:action="@{/customer_form/put}" th:object="${customer}" method="put">
     <table>
       <tr>
         <td>Customer ID</td>

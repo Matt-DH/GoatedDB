@@ -16,10 +16,7 @@
       <th>Vehicle Age</th>
       <th>Accidents</th>
       <th>Location</th>
-<!--  cant get customer details to load for some reason    -->
-<!--      <th>Customer ID</th>-->
-<!--      <th>Customer Last Name</th>-->
-<!--      <th>Customer First Name</th>-->
+      <th>Customer</th>
     </tr>
     </thead>
     <tbody>
@@ -31,9 +28,7 @@
         <td th:text="${quoteAuto.getVehicleAge()}"></td>
         <td th:text="${quoteAuto.getAccidents()}"></td>
         <td th:text="${quoteAuto.getLocation()}"></td>
-<!--        <td th:text="${quoteAuto.getCustomer().getId()}"></td>-->
-<!--        <td th:text="${quoteAuto.getCustomer().getNameLast()}"></td>-->
-<!--        <td th:text="${quoteAuto.getCustomer().getNameFirst()}"></td>-->
+        <td th:text="${quoteAuto.getCustomer()}"></td>
       </tr>
     </th:block>
   </table>

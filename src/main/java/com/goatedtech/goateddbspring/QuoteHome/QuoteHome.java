@@ -13,6 +13,7 @@ public class QuoteHome extends Quote {
     private final int BASE = 500;
 
     private int id;
+    private double total;
     private double homeAge;
     private int dwellingType;
     private int heatingType;
@@ -38,6 +39,10 @@ public class QuoteHome extends Quote {
         this.id = id;
     }
 
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
     public void setHomeAge(float homeAge) {
         this.homeAge = homeAge;
     }
@@ -53,6 +58,14 @@ public class QuoteHome extends Quote {
     // GETTERS
     public int getId() {
         return id;
+    }
+
+    public double getBase() {
+        return BASE;
+    }
+
+    public double getTotal() {
+        return total;
     }
 
     public double getHomeAge() {

@@ -10,9 +10,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
+/**
+ * Controller for customer HTTP requests
+ */
 @Controller
 public class CustomerController {
 
+    /**
+     * Gets customer view page
+     * @param model
+     * @return
+     */
     @GetMapping("/customer_view")
     public String customerList(Model model) {
         List<Customer> customerList = DBManager.recordLibrary.getCustomerList();
@@ -20,18 +28,33 @@ public class CustomerController {
         return "customer_view";
     }
 
+    /**
+     * Gets customer form page
+     * @param model
+     * @return
+     */
     @GetMapping("/customer_form")
     public String customerForm(Model model) {
         model.addAttribute("customer", new Customer());
         return "customer_form";
     }
 
+    /**
+     * Gets customer update page
+     * @param model
+     * @return
+     */
     @GetMapping("/customer_update")
     public String customerUpdate(Model model) {
         model.addAttribute("customer", new Customer());
         return "customer_update";
     }
 
+    /**
+     * Posts customer form submission
+     * @param customer
+     * @return
+     */
     @PostMapping("/customer_form/post")
     public String customerAdd(Customer customer) {
         DBManager.recordLibrary.addCustomer(customer);
@@ -42,6 +65,11 @@ public class CustomerController {
         return "redirect:/";
     }
 
+    /**
+     * Posts customer update submission
+     * @param customer
+     * @return
+     */
     @PutMapping("/customer_update/put")
     public String customerUpdate(Customer customer) {
         DBManager.updateCustomer(
@@ -52,6 +80,10 @@ public class CustomerController {
         return "redirect:/";
     }
 
+    /**
+     * Deletes customer submission
+     * @return
+     */
     @DeleteMapping("/customer_deleteall")
     public String customerDeleteAll() {
         DBManager.deleteAllCustomers();

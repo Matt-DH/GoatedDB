@@ -9,9 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+/**
+ * Controller for home quote HTTP request mappings
+ */
 @Controller
 public class QuoteHomeController {
 
+    /**
+     * Gets home quote view page request
+     * @param model
+     * @return
+     */
     @GetMapping("/quotehome_view")
     public String quoteHomeList(Model model) {
         List<QuoteHome> quoteHomeList = DBManager.recordLibrary.getHomeList();
@@ -19,12 +27,22 @@ public class QuoteHomeController {
         return "quotehome_view";
     }
 
+    /**
+     * Gets home quote form page request
+     * @param model
+     * @return
+     */
     @GetMapping("/quotehome_form")
     public String quoteHomeForm(Model model) {
         model.addAttribute("quoteHome", new QuoteHome());
         return "quotehome_form";
     }
 
+    /**
+     * Posts home quote add request
+     * @param quoteHome
+     * @return
+     */
     @PostMapping("/quotehome_form/add")
     public String quoteHomeAdd(QuoteHome quoteHome) {
         DBManager.recordLibrary.addQuoteHome(quoteHome);

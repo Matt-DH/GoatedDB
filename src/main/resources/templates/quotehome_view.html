@@ -14,6 +14,8 @@
             <th>Home Age</th>
             <th>Heating Type</th>
             <th>Dwelling Type</th>
+            <th>Customer</th>
+            <th>Premium Total</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +25,8 @@
                 <td th:text="${quoteHome.getHomeAge()}"></td>
                 <td th:text="${quoteHome.getHeatingType()}"></td>
                 <td th:text="${quoteHome.getDwellingType()}"></td>
+                <td th:text="${quoteHome.getCustomer()}"></td>
+                <td th:text="${quoteHome.getTotal()}"></td>
             </tr>
         </th:block>
     </table>

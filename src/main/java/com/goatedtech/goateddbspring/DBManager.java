@@ -18,14 +18,23 @@ import java.util.List;
 public class DBManager {
 
     public static RecordLibrary recordLibrary;
+    public static Calculator calculator = new Calculator();
 
+    /**
+     * This function instantiates and loads the data and relationships for the recordLibrary
+     * @return
+     */
     public static RecordLibrary prepareRecords() {
         recordLibrary = loadRecords();
+        calculatePremiums(recordLibrary);
         loadRelationships(recordLibrary);
         return recordLibrary;
     }
 
-    // Function to instantiate and return a quotelibrary object containing quoteauto and quotehome objects for every record in the db
+    /**
+     * Loads the records into the recordLibrary object
+     * @return
+     */
     public static RecordLibrary loadRecords() {
         RecordLibrary recordLibrary = new RecordLibrary(
                 loadQuoteAutoList(),
@@ -35,11 +44,34 @@ public class DBManager {
         return recordLibrary;
     }
 
+    /**
+     * Runs through all quotes in the recordLibrary object and calculates the total premium
+     * using the calculator class
+     * @param recordLibrary
+     */
+    public static void calculatePremiums(RecordLibrary recordLibrary) {
+        for (QuoteAuto quoteAuto : recordLibrary.getAutoList()) {
+            quoteAuto.setTotal(calculator.calculateAutoPremium(quoteAuto));
+        }
+        for (QuoteHome quoteHome : recordLibrary.getHomeList()) {
+            quoteHome.setTotal(calculator.calculateHomePremium(quoteHome));
+        }
+    }
+
+    /**
+     * Loads the relationships for all the quotes and customers in the recordLibrary
+     * @param recordLibrary
+     */
     public static void loadRelationships(RecordLibrary recordLibrary) {
         buildQuotesAutoRelationships(recordLibrary.getCustomerList(), recordLibrary.getAutoList());
         buildQuotesHomeRelationships(recordLibrary.getCustomerList(), recordLibrary.getHomeList());
     }
 
+    /**
+     * Uses the bridge table in the DB to build relationships between auto quotes and customers
+     * @param customerList
+     * @param autoList
+     */
     private static void buildQuotesAutoRelationships(List<Customer> customerList, List<QuoteAuto> autoList) {
         try {
             String sql = String.format("SELECT * FROM %s", DBConfig.DB_GOAT_BRIDGEQUOTESAUTO_TABLENAME);
@@ -71,6 +103,11 @@ public class DBManager {
         }
     }
 
+    /**
+     * Uses the bridge table in the DB to build relationships between home quotes and customers
+     * @param customerList
+     * @param homeList
+     */
     private static void buildQuotesHomeRelationships(List<Customer> customerList, List<QuoteHome> homeList) {
         try {
             String sql = String.format("SELECT * FROM %s", DBConfig.DB_GOAT_BRIDGEQUOTESHOME_TABLENAME);
@@ -103,7 +140,8 @@ public class DBManager {
     }
 
     /**
-     * Function to instantiate objects for each AutoQuote record in the db, append them to a new LinkedList, and return the LinkedList
+     * Function to instantiate objects for each AutoQuote record in the db,
+     * append them to a new LinkedList, and return the LinkedList
      * @return
      */
     public static LinkedList<QuoteAuto> loadQuoteAutoList() {
@@ -128,6 +166,11 @@ public class DBManager {
         return quoteAutoList;
     }
 
+    /**
+     * Function to instantiate objects for each HomeQuote record in the db,
+     * append them to a new LinkedList, and return the LinkedList
+     * @return
+     */
     public static LinkedList<QuoteHome> loadQuoteHomeList() {
         LinkedList<QuoteHome> quoteHomeList = new LinkedList<>();
         try {
@@ -148,6 +191,11 @@ public class DBManager {
         return quoteHomeList;
     }
 
+    /**
+     * Function to instantiate objects for each Customer record in the db,
+     * append them to a new LinkedList, and return the LinkedList
+     * @return
+     */
     public static LinkedList<Customer> loadCustomerList() {
         LinkedList<Customer> customerList = new LinkedList<>();
         try {
@@ -167,6 +215,10 @@ public class DBManager {
         return customerList;
     }
 
+    /**
+     * Performs CRUD operation Delete on all records in the Customer
+     * table in the DB
+     */
     public static void deleteAllCustomers() {
         try {
             String sql = "DELETE FROM " + DBConfig.DB_GOAT_CUSTOMERS_TABLENAME + ";";
@@ -177,6 +229,15 @@ public class DBManager {
         }
     }
 
+    /**
+     * Performs CRUD operation CREATE on the quoteauto table in the DB
+     * @param id
+     * @param value
+     * @param driverAge
+     * @param vehicleAge
+     * @param accidents
+     * @param location
+     */
     public static void addQuoteAuto(int id, double value, int driverAge, int vehicleAge, int accidents, int location) {
         try {
             String sql = "INSERT INTO " + DBConfig.DB_GOAT_QUOTESAUTO_TABLENAME + " VALUES (" +
@@ -193,6 +254,13 @@ public class DBManager {
         }
     }
 
+    /**
+     * Performs CRUD operation CREATE on quotehome table in the db
+     * @param id
+     * @param houseAge
+     * @param heatingType
+     * @param dwellingType
+     */
     public static void addQuoteHome(int id, double houseAge, int heatingType, int dwellingType) {
         try {
             String sql = "INSERT INTO " + DBConfig.DB_GOAT_QUOTESHOME_TABLENAME + " VALUES (" +
@@ -207,6 +275,12 @@ public class DBManager {
         }
     }
 
+    /**
+     * Performs CRUD operation CREATE on customer table in the DB
+     * @param id
+     * @param nameLast
+     * @param nameFirst
+     */
     public static void addCustomer(int id, String nameLast, String nameFirst) {
         try {
             String sql = "INSERT INTO " + DBConfig.DB_GOAT_CUSTOMERS_TABLENAME + " VALUES (" +
@@ -220,6 +294,12 @@ public class DBManager {
         }
     }
 
+    /**
+     * Perform CRUD operation UPDATE on customer table in the db
+     * @param id
+     * @param nameLast
+     * @param nameFirst
+     */
     public static void updateCustomer(int id, String nameLast, String nameFirst) {
         try {
             String sql = String.format("UPDATE %s SET %s = \"%s\", %s = \"%s\" WHERE %s = \"%s\";",
@@ -237,6 +317,11 @@ public class DBManager {
         }
     }
 
+    /**
+     * Perform CRUD operation CREATE on quoteauto bridge table in the DB
+     * @param customerid
+     * @param quoteid
+     */
     public static void addQuoteAutoBridge(int customerid, int quoteid) {
         try {
             String sql = "INSERT INTO " + DBConfig.DB_GOAT_BRIDGEQUOTESAUTO_TABLENAME + " VALUES (" +
@@ -249,6 +334,11 @@ public class DBManager {
         }
     }
 
+    /**
+     * Perform CRUD operation CREATE on quotehome bridge table in the DB
+     * @param customerid
+     * @param quoteid
+     */
     public static void addQuoteHomeBridge(int customerid, int quoteid) {
         try {
             String sql = "INSERT INTO " + DBConfig.DB_GOAT_BRIDGEQUOTESHOME_TABLENAME + " VALUES (" +
@@ -261,6 +351,10 @@ public class DBManager {
         }
     }
 
+    /**
+     * Try creating and returning a new connection object
+     * @return
+     */
     public static Connection connectionOpen() {
         Connection returnConnection = null;
         try {
@@ -272,6 +366,10 @@ public class DBManager {
         return returnConnection;
     }
 
+    /**
+     * Gets passed a connection object to try closing
+     * @param connection
+     */
     public static void connectionClose(Connection connection) {
         try {
             connection.close();
@@ -280,6 +378,10 @@ public class DBManager {
         }
     }
 
+    /**
+     * Sends a passed String to the DB as an update
+     * @param query
+     */
     public static void executeUpdate(String query) {
         Connection connection = connectionOpen();
         try {
@@ -292,6 +394,11 @@ public class DBManager {
         }
     }
 
+    /**
+     * Sends a passed String to the DB as a query and returns query result set
+     * @param query
+     * @return
+     */
     public static ResultSet executeQuery(String query) {
         Connection connection = connectionOpen();
         ResultSet resultSet = null;

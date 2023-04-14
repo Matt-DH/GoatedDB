@@ -17,6 +17,7 @@
       <th>Accidents</th>
       <th>Location</th>
       <th>Customer</th>
+      <th>Premium Total</th>
     </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@
         <td th:text="${quoteAuto.getAccidents()}"></td>
         <td th:text="${quoteAuto.getLocation()}"></td>
         <td th:text="${quoteAuto.getCustomer()}"></td>
+        <td th:text="${quoteAuto.getTotal()}"></td>
       </tr>
     </th:block>
   </table>

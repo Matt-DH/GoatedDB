@@ -10,9 +10,10 @@ import com.goatedtech.goateddbspring.Quote.Quote;
 public class QuoteAuto extends Quote {
 
     // VARIABLES
-    public final double base = 750.00;
+    public final double BASE = 750.00;
 
     private int id;
+    private double total;
     private double carValue;
     private int driverAge;
     private int vehicleAge;
@@ -44,6 +45,10 @@ public class QuoteAuto extends Quote {
         this.id = id;
     }
 
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
     public void setCarValue(double carValue) {
         this.carValue = carValue;
     }
@@ -63,6 +68,14 @@ public class QuoteAuto extends Quote {
     }
 
     // GETTERS
+
+    public double getBase() {
+        return BASE;
+    }
+
+    public double getTotal() {
+        return total;
+    }
 
     public int getId() {
         return id;

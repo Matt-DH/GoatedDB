@@ -4,6 +4,9 @@ import com.goatedtech.goateddbspring.RecordLibrary.RecordLibrary;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Startpoint for the Spring application
+ */
 @SpringBootApplication
 public class GoatedDbSpringApplication {
 
